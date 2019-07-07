@@ -1,0 +1,39 @@
+BootStrap: docker
+From: ubuntu:latest
+
+%environment
+   export PATH=/julia-1.1.1/bin:$PATH
+   export LD_LIBRARY_PATH=/julia-1.1.1/lib:/julia-1.1.1/lib/julia:$LD_LIBRARY_PATH
+   export LC_ALL=C
+
+%post
+   # Dependencies
+   apt-get update  -y 
+   apt-get install -y wget tar gzip vim git man
+   apt-get install -y cmake g++ swig python-dev ipython
+   apt-get install -y libgflags-dev libgoogle-glog-dev libgtest-dev libssl-dev
+   apt-get install -y libedit-dev libncurses5-dev 
+   apt-get clean
+   apt-get autoremove
+   
+   # Julia
+   wget https://julialang-s3.julialang.org/bin/linux/x64/1.1/julia-1.1.1-linux-x86_64.tar.gz
+   tar -C / -zxf julia-1.1.1-linux-x86_64.tar.gz
+   rm -f julia-1.1.1-linux-x86_64.tar.gz
+   
+   # S2
+   git clone https://github.com/google/s2geometry.git
+   
+   cd s2geometry && mkdir build && cd build
+   cmake .. \
+   -DCMAKE_INSTALL_PREFIX=/usr \
+   -DWITH_GFLAGS=ON \
+   -WITH_GTEST=ON -DGTEST_ROOT=/usr/src/gtest \
+   -DPYTHON_INCLUDE_DIR=/usr/include/python2.7 \
+   -DPYTHON_LIBRARY=/usr/lib/python2.7/config-x86_64-linux-gnu/libpython2.7.so
+   
+   make && make install
+   
+%test 
+   cd s2geometry/build
+   make test
