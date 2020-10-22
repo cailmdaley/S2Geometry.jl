@@ -11,7 +11,6 @@ end
 query = @cxx S2ClosestPointQuery{int64}()
 icxx"S2ClosestPointQuery<int> query(&$(index));"
 typeof(index)
-typeof)
 
 @cxx (@cxx query -> index()) -> Add(point, 1)
 @cxx index -> Add(point, i)
