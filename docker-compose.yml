@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  s2geometry:
+    image: cailmdaley/s2geometry
+    container_name: s2geometry
+    volumes: 
+      - '/Users/cailmdaley/:/Users/cailmdaley/'
+    command: jupyter lab
+    tty: true
+    stdin_open: true

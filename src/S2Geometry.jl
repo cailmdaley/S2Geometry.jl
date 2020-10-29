@@ -1,22 +1,22 @@
 module S2Geometry
 __precompile__(false)
 
-using Reexport
-
-@reexport using Cxx, Cxx.CxxCore
+using Cxx, Cxx.CxxCore
 using Libdl
 
-Libdl.dlopen("/s2geometry/build/libs2.so", Libdl.RTLD_GLOBAL)
+
+addHeaderDir("/usr/local/include", kind=C_System)
+Libdl.dlopen("/src/s2geometry/build/libs2.so", Libdl.RTLD_GLOBAL)
 Libdl.dlopen("/usr/lib/x86_64-linux-gnu/libgflags.so", Libdl.RTLD_GLOBAL)
 Libdl.dlopen("/usr/lib/x86_64-linux-gnu/libglog.so", Libdl.RTLD_GLOBAL)
 
 cxx""" 
-	#include <iostream>
-	#include "s2/s2latlng.h"
-	#include "s2/s2closest_cell_query.h"
-	#include "s2/s2cell_index.h"
-	#include "s2/value_lexicon.h"
-	"""
+#include <iostream>
+#include "s2/s2latlng.h"
+#include "s2/s2closest_cell_query.h"
+#include "s2/s2cell_index.h"
+#include "s2/value_lexicon.h"
+"""
 	
 ################################################################################
 # Show functions
