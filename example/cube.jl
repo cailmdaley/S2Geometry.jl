@@ -6,11 +6,6 @@ py"""
 from spt3g.lensing.map_spec_utils import get_camb_lensedcl
 """
 
-cxx"""
-#include <s2/s2coords.h>
-#include <s2/s2cell_id.h>
-"""
-
 function st2θϕ(face, s, t)
     i, j = icxx"S2::STtoIJ($s);", icxx"S2::STtoIJ($t);"
     latlng = icxx"S2CellId::FromFaceIJ($face, $i, $j).ToLatLng();"
