@@ -34,7 +34,7 @@ healpix_map = hp.synfast(py"get_camb_lensedcl()['TT']", healpix_Nside)
 faces = healpix_to_cube(healpix_map, face_Nside)
 
 for face in 1:6
-    heatmap(faces[i], aspect_ratio=:equal, framestyle=:none, margin=-0.2Plots.cm,
+    heatmap(faces[face], aspect_ratio=:equal, framestyle=:none, margin=-0.2Plots.cm,
             cbar=false, ticks=false, size=(700, 700))
     savefig("example/plots/face$face.png")
 end
