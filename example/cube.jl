@@ -13,7 +13,7 @@ cxx"""
 
 function st2θϕ(face, s, t)
     i, j = icxx"S2::STtoIJ($s);", icxx"S2::STtoIJ($t);"
-    latlng = icxx"::FromFaceIJ($face, $i, $j).ToLatLng();"
+    latlng = icxx"S2CellId::FromFaceIJ($face, $i, $j).ToLatLng();"
     θ, ϕ = icxx"$latlng.lat().radians();" + π/2, icxx"$latlng.lng().radians();" + π
 end
 
